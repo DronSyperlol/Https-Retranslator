@@ -21,12 +21,12 @@ const server = https
 
 
 function connectionHandler(request, result) {
-    console.log("Request: " + request);
     var requestData = '';
     request.on('data', (chunk) => {
         requestData += chunk;
     });
     request.on('end', () => {
+        console.log(`Request from ${request.socket.remoteAddress} : ${requestData.length > 0 ? requestData : "<empty>"}`);
         routing(requestData).then((responseData) => {
             result.end(responseData);
         }).catch((error) => {
