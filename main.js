@@ -30,6 +30,7 @@ function connectionHandler(request, result) {
         routing(requestData).then((responseData) => {
             result.end(responseData);
         }).catch((error) => {
+            console.log(`Routing error: ${error}`);
             result.statusCode = 500;
             result.end();
         });
