@@ -28,6 +28,7 @@ function connectionHandler(request, result) {
     request.on('end', () => {
         console.log(`Request from ${request.socket.remoteAddress} : ${requestData.length > 0 ? requestData : "<empty>"}`);
         routing(requestData).then((responseData) => {
+            console.debug(`Routing ended`);
             result.end(responseData);
         }).catch((error) => {
             console.log(`Routing error: ${error}`);
@@ -56,5 +57,5 @@ async function routing(message) {
         console.error(ex);
         return 'Execute error';
     }
-    return response.data;
+    return typeof response.data == "string" ? response.data : JSON.stringify(response.data);
 }
