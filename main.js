@@ -19,7 +19,7 @@ const server = https
         );
     });
 
-
+// я бы сделал лучше, лох
 function connectionHandler(request, result) {
     var requestData = '';
     request.on('data', (chunk) => {
